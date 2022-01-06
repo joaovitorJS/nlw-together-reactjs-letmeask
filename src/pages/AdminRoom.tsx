@@ -6,6 +6,8 @@ import { database } from "../services/firebase";
 
 import logoImg from "../assets/images/logo.svg";
 import deleteImg from "../assets/images/delete.svg";
+import checkImg from "../assets/images/check.svg";
+import answerImg from "../assets/images/answer.svg";
 
 import { Button } from "../components/Button";
 import { RoomCode } from "../components/RoomCode";
@@ -27,6 +29,17 @@ export function AdminRoom() {
     navigate("/");
   }
 
+  async function  hanldeCheckQuestionAsAnswered(questionId: string) {
+    update(ref(database, `rooms/${id}/questions/${questionId}`), {
+      isAnswered: true,
+    });
+  }
+
+  async function  hanldeHighlightQuestion(questionId: string) {
+    update(ref(database, `rooms/${id}/questions/${questionId}`), {
+      isHighlighted: true,
+    });
+  }
 
   async function  hanldeDeleteQuestion(questionId: string) {
     if (window.confirm("Você tem certeza que você deseja excluir está perguntar?")) {
@@ -61,7 +74,28 @@ export function AdminRoom() {
                 key={question.id}  
                 content={question.content}
                 author={question.author}
+                isAnswered={question.isAnswered}
+                isHighlighted={question.isHighlighted}
               >
+                { !question.isAnswered && (
+                    <>
+                      <button
+                        type="button"
+                        aria-label="Marcar pergunta como respondida"
+                        onClick={() => hanldeCheckQuestionAsAnswered(question.id)}
+                      >
+                        <img src={checkImg} alt="Marcar pergunta como respondida" />
+                      </button>
+                      <button
+                        type="button"
+                        aria-label="Dar destaque à pergunta"
+                        onClick={() => hanldeHighlightQuestion(question.id)}
+                      >
+                        <img src={answerImg} alt="Dar destaque à pergunta" />
+                      </button>
+                    </>
+                  )
+                }
                 <button
                   type="button"
                   aria-label="Remover Pergunta"
