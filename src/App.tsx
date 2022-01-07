@@ -6,10 +6,13 @@ import { NewRoom } from "./pages/NewRoom";
 import { Room } from "./pages/Room";
 import { AdminRoom } from "./pages/AdminRoom";
 
+import GlobalStyle from "./styles/global";
+
 function App() {
   return (
     <BrowserRouter>
       <AuthContextProvider>
+        <GlobalStyle />
         <Routes>
           <Route path="/" element={<Home />}/>
           <Route path="rooms/new" element={<NewRoom />}/>
