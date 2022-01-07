@@ -9,15 +9,18 @@ import { Container, Main, MainContent, ButtonGoogle, Separator } from "./styles"
 
 import logoImg from "../../assets/images/logo.svg";
 import googleIconImg from "../../assets/images/google-icon.svg";
+import whiteLogoImg from "../../assets/images/white-logo.svg";
 
 import { Button } from "../../components/Button";
 import { Aside } from "../../components/Aside";
+import { useSwitchTheme } from "../../hooks/useSwitchTheme";
 
 
 export function Home() {
   const navigate = useNavigate();
   const { user, signInWithGoogle } = useAuth();
   const [roomCode, setRoomCode] = useState("");
+  const { theme } = useSwitchTheme();
 
   async function handleCreateRoom() {
     if (!user) {
@@ -58,7 +61,7 @@ export function Home() {
 
       <Main>
         <MainContent>
-          <img src={logoImg} alt="Logo Letmeask" />
+          <img src={theme.title === "dark" ? whiteLogoImg : logoImg} alt="Letmeask" />
           <ButtonGoogle onClick={handleCreateRoom}>
             <img src={googleIconImg} alt="Logo do Google" />
             Crie sua sala com o Google

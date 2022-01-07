@@ -10,10 +10,14 @@ import logoImg from "../../assets/images/logo.svg";
 import deleteImg from "../../assets/images/delete.svg";
 import checkImg from "../../assets/images/check.svg";
 import answerImg from "../../assets/images/answer.svg";
+import whiteLogoImg from "../../assets/images/white-logo.svg";
+
 
 import { Button } from "../../components/Button";
 import { RoomCode } from "../../components/RoomCode";
 import { Question } from "../../components/Question";
+import { useSwitchTheme } from "../../hooks/useSwitchTheme";
+import { SwitchTheme } from "../../components/SwitchTheme";
 
 
 
@@ -21,6 +25,7 @@ export function AdminRoom() {
   const navigate = useNavigate();
   const { id } = useParams();
   const { questions, title } = useRoom(id);
+  const { theme } = useSwitchTheme();
 
   async function handleEndRoom() {
     update(ref(database, `rooms/${id}`), {
@@ -53,8 +58,9 @@ export function AdminRoom() {
     <>
       <Header>
         <HeaderContent>
-          <img src={logoImg} alt="Letmeask" />
+          <img src={theme.title === "dark" ? whiteLogoImg : logoImg} alt="Letmeask" />
           <div>
+            <SwitchTheme />
             <RoomCode code={id || ""}/>
             <Button isOutlined onClick={handleEndRoom}>Encerrar sala</Button>
           </div>

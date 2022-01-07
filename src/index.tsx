@@ -2,10 +2,13 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 
 import App from './App';
+import { SwitchThemeProvider } from './context/SwitchThemeContext';
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <SwitchThemeProvider>
+      <App />
+    </ SwitchThemeProvider>
   </React.StrictMode>,
   document.getElementById('root')
 );

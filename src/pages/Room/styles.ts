@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { darken } from "polished";
 
 export const Header = styled.header`
   padding: 24px;
@@ -14,6 +15,12 @@ export const HeaderContent = styled.div`
 
   > img {
     max-height: 45px;
+  }
+
+  > div {
+    display: flex;
+    align-items: center;
+    gap: 16px;
   }
 `;
 
@@ -34,12 +41,12 @@ export const RoomTitle = styled.div`
   h1 {
     font-family: "Poppins", sans-serif;
     font-size: 24px;
-    color: #29292e;
+    color: ${props => props.theme.colors.colorTitle};
   }
 
   span {
     margin-left: 16px;
-    background: #e559f9;
+    background: ${props => props.theme.title === "dark" ? darken(0.15,"#e559f9") : "#e559f9"};
     border-radius: 9999px;
     padding: 8px 16px;
     color: #fff;
@@ -54,7 +61,7 @@ export const Form = styled.form`
     border: 0;
     padding: 16px;
     border-radius: 8px;
-    background: #fefefe;
+    background: ${props => props.theme.colors.backgroungForm};
     box-shadow: 0 2px 12px rgba(0,0,0,0.04);
     resize: vertical;
     min-height: 130px;
@@ -97,7 +104,7 @@ export const UserInfo = styled.div`
 
   span {
     margin-left: 8px;
-    color: #29292e;
+    color: ${props => props.theme.colors.colorTitle};
     font-weight: 500;
     font-size: 14px;
   }

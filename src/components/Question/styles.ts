@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 export const QuestionContainer = styled.div`
-  background: #fefefe;
+  background: ${props => props.theme.colors.backgroungForm};
   border-radius: 8px;
   box-shadow: 0 2px 12px rgba(0, 0, 0, 0.04);
   padding: 24px;
@@ -11,7 +11,7 @@ export const QuestionContainer = styled.div`
   }
 
   &.highlighted {
-    background: #f4f0ff;
+    background: ${props => props.theme.colors.highlighted};
     border: 1px solid #835afd;
 
     footer .user-info span {
@@ -20,7 +20,7 @@ export const QuestionContainer = styled.div`
   }
 
   &.answered {
-    background: #dbdcdd;
+    background: ${props => props.theme.colors.answered};
   }
 
   p {

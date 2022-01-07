@@ -9,17 +9,22 @@ import { database } from "../../services/firebase";
 import { Content, Form, FormFooter, Header, HeaderContent, QuestionList, RoomTitle, UserInfo } from "./styles";
 
 import logoImg from "../../assets/images/logo.svg";
+import whiteLogoImg from "../../assets/images/white-logo.svg";
 
 import { Button } from "../../components/Button";
 import { RoomCode } from "../../components/RoomCode";
 import { Question } from "../../components/Question";
+import { SwitchTheme } from "../../components/SwitchTheme";
+import { useSwitchTheme } from "../../hooks/useSwitchTheme";
+
 
 export function Room() {
   const { id } = useParams();
   const { user } = useAuth(); 
   const [newQuestion, setNewQuestion] = useState("");
   const { questions, title } = useRoom(id);
-  
+  const { theme } = useSwitchTheme();
+
 
   async function handleSendQuestion(event: FormEvent) {
     event.preventDefault();
@@ -61,8 +66,11 @@ export function Room() {
     <>
       <Header>
         <HeaderContent>
-          <img src={logoImg} alt="Letmeask" />
-          <RoomCode code={id || ""}/>
+          <img src={theme.title === "dark" ? whiteLogoImg : logoImg} alt="Letmeask" />
+          <div>
+            <SwitchTheme />
+            <RoomCode code={id || ""}/>
+          </div>
         </HeaderContent>
       </Header>
 

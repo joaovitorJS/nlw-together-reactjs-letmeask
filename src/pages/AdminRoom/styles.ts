@@ -19,6 +19,7 @@ export const HeaderContent = styled.div`
 
   > div {
     display: flex;
+    align-items: center;
     gap: 16px;
     
     button {
@@ -44,7 +45,7 @@ export const RoomTitle = styled.div`
   h1 {
     font-family: "Poppins", sans-serif;
     font-size: 24px;
-    color: #29292e;
+    color: ${props => props.theme.colors.colorTitle};
   }
 
   span {

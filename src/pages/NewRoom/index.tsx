@@ -8,15 +8,19 @@ import { ref, push } from "firebase/database";
 import { Container, Main, MainContent } from "./styles";
 
 import logoImg from "../../assets/images/logo.svg";
+import whiteLogoImg from "../../assets/images/white-logo.svg";
 
 import { Button } from "../../components/Button";
 import { Aside } from "../../components/Aside";
+import { useSwitchTheme } from "../../hooks/useSwitchTheme";
 
 
 export function NewRoom() {
   const navigate = useNavigate();
   const { user } = useAuth()
   const [newRoom, setNewRoom] = useState("");
+  const { theme } = useSwitchTheme();
+
 
   async function handleCreateRoom(event: FormEvent) {
     event.preventDefault();
@@ -41,7 +45,7 @@ export function NewRoom() {
 
       <Main>
         <MainContent>
-          <img src={logoImg} alt="Logo Letmeask" />
+          <img src={theme.title === "dark" ? whiteLogoImg : logoImg} alt="Letmeask" />
 
           <h2>Criar uma nova sala</h2>
       
