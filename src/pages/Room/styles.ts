@@ -21,13 +21,22 @@ export const HeaderContent = styled.div`
     display: flex;
     align-items: center;
     gap: 16px;
+
+    @media screen and (max-width: 600px){     
+      margin-left: 16px;
+    } 
   }
 `;
 
 export const Content = styled.main`
   max-width: 800px;
   margin: 0 auto;
-`;
+  margin-bottom: 50px; 
+
+  @media screen and (max-width: 768px) {
+    padding: 0 24px;
+  }
+`;    
 
 export const QuestionList = styled.div` 
   margin-top: 32px;
@@ -36,7 +45,13 @@ export const QuestionList = styled.div`
 export const RoomTitle = styled.div`
   margin: 32px 0 24px;
   display: flex;
-  align-items: center;
+  align-items: center;  
+  justify-content: space-between;
+
+  > div {
+    display: flex;
+    align-items: center;
+  }
 
   h1 {
     font-family: "Poppins", sans-serif;

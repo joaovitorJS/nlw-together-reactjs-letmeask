@@ -13,6 +13,7 @@ import whiteLogoImg from "../../assets/images/white-logo.svg";
 import { Button } from "../../components/Button";
 import { Aside } from "../../components/Aside";
 import { useSwitchTheme } from "../../hooks/useSwitchTheme";
+import useWindowDimensions from "../../hooks/useWindowDimensions";
 
 
 export function NewRoom() {
@@ -20,6 +21,7 @@ export function NewRoom() {
   const { user } = useAuth()
   const [newRoom, setNewRoom] = useState("");
   const { theme } = useSwitchTheme();
+  const { width } = useWindowDimensions();
 
 
   async function handleCreateRoom(event: FormEvent) {
@@ -41,7 +43,9 @@ export function NewRoom() {
 
   return (
     <Container>
-      <Aside />
+      {width > 768 &&
+        <Aside />
+      }
 
       <Main>
         <MainContent>

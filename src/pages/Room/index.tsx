@@ -16,6 +16,7 @@ import { RoomCode } from "../../components/RoomCode";
 import { Question } from "../../components/Question";
 import { SwitchTheme } from "../../components/SwitchTheme";
 import { useSwitchTheme } from "../../hooks/useSwitchTheme";
+import useWindowDimensions from "../../hooks/useWindowDimensions";
 
 
 export function Room() {
@@ -24,6 +25,7 @@ export function Room() {
   const [newQuestion, setNewQuestion] = useState("");
   const { questions, title } = useRoom(id);
   const { theme } = useSwitchTheme();
+  const { width } = useWindowDimensions();
 
 
   async function handleSendQuestion(event: FormEvent) {
@@ -68,18 +70,25 @@ export function Room() {
         <HeaderContent>
           <img src={theme.title === "dark" ? whiteLogoImg : logoImg} alt="Letmeask" />
           <div>
-            <SwitchTheme />
+            {width > 768 &&
+              <SwitchTheme />
+            }
             <RoomCode code={id || ""}/>
           </div>
         </HeaderContent>
       </Header>
 
       <Content>
-        <RoomTitle>
-          <h1>{title}</h1>
-          { questions.length > 0 &&
-            <span>{questions.length} {questions.length === 1 ? 'pergunta': 'perguntas'}</span>
-          }
+        <RoomTitle>     
+          <div>
+            <h1>{title}</h1>
+            { questions.length > 0 &&
+              <span>{questions.length} {questions.length === 1 ? 'pergunta': 'perguntas'}</span>
+            }
+          </div>
+          {width <= 768 &&
+            <SwitchTheme />
+          }       
         </RoomTitle>
 
         <Form onSubmit={handleSendQuestion}>

@@ -14,6 +14,7 @@ import whiteLogoImg from "../../assets/images/white-logo.svg";
 import { Button } from "../../components/Button";
 import { Aside } from "../../components/Aside";
 import { useSwitchTheme } from "../../hooks/useSwitchTheme";
+import useWindowDimensions from "../../hooks/useWindowDimensions";
 
 
 export function Home() {
@@ -21,6 +22,7 @@ export function Home() {
   const { user, signInWithGoogle } = useAuth();
   const [roomCode, setRoomCode] = useState("");
   const { theme } = useSwitchTheme();
+  const { width } = useWindowDimensions();
 
   async function handleCreateRoom() {
     if (!user) {
@@ -57,7 +59,9 @@ export function Home() {
 
   return (
     <Container>
-      <Aside />
+      {width > 768 &&
+        <Aside />
+      }
 
       <Main>
         <MainContent>

@@ -35,4 +35,8 @@ export const ButtonContainer = styled.button`
     opacity: 0.6;
     cursor: not-allowed;
   }
-`;
+
+  @media screen and (max-width: 600px){
+    padding: 0 16px;
+  }
+`;        

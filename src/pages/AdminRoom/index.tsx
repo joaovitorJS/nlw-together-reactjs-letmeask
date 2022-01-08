@@ -18,6 +18,7 @@ import { RoomCode } from "../../components/RoomCode";
 import { Question } from "../../components/Question";
 import { useSwitchTheme } from "../../hooks/useSwitchTheme";
 import { SwitchTheme } from "../../components/SwitchTheme";
+import useWindowDimensions from "../../hooks/useWindowDimensions";
 
 
 
@@ -26,6 +27,7 @@ export function AdminRoom() {
   const { id } = useParams();
   const { questions, title } = useRoom(id);
   const { theme } = useSwitchTheme();
+  const { width } = useWindowDimensions();
 
   async function handleEndRoom() {
     update(ref(database, `rooms/${id}`), {
@@ -53,25 +55,31 @@ export function AdminRoom() {
     }
   }
 
-
   return (
     <>
       <Header>
         <HeaderContent>
           <img src={theme.title === "dark" ? whiteLogoImg : logoImg} alt="Letmeask" />
           <div>
-            <SwitchTheme />
+            {width > 768 &&
+              <SwitchTheme />
+            }
             <RoomCode code={id || ""}/>
-            <Button isOutlined onClick={handleEndRoom}>Encerrar sala</Button>
+            <Button isOutlined onClick={handleEndRoom}>Encerrar sala</Button>   
           </div>
         </HeaderContent>
       </Header>
 
       <Content>
         <RoomTitle>
-          <h1>{title}</h1>
-          { questions.length > 0 &&
-            <span>{questions.length} {questions.length === 1 ? 'pergunta': 'perguntas'}</span>
+          <div>
+            <h1>{title}</h1>
+            { questions.length > 0 &&
+              <span>{questions.length} {questions.length === 1 ? 'pergunta': 'perguntas'}</span>
+            }
+          </div>
+          {width <= 768 &&
+            <SwitchTheme /> 
           }
         </RoomTitle>
         

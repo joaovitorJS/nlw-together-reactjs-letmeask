@@ -1,4 +1,5 @@
 import copyImg from "../../assets/images/copy.svg";
+import useWindowDimensions from "../../hooks/useWindowDimensions";
 
 import { ButtonContainer } from "./styles";
 
@@ -7,6 +8,8 @@ interface RoomCodeProps {
 }
 
 export function RoomCode({code}: RoomCodeProps) {
+  const { width } = useWindowDimensions();
+
   function copyRoomCodeToClipboard() {
     navigator.clipboard.writeText(code);
   }
@@ -16,7 +19,12 @@ export function RoomCode({code}: RoomCodeProps) {
       <div>
         <img src={copyImg} alt="Copiar o código da sala" />
       </div>
-      <span>Sala #{code}</span>
+      {width <= 600 
+      ?
+        <span>Copy Code</span>
+      :     
+        <span>Sala #{code}</span>
+      }
     </ButtonContainer>
   );
 }

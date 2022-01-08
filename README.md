@@ -62,6 +62,8 @@ O **Letmeask** é uma aplicação para criadores de conteúdos poderem criar sal
   <img alt="Layout letmeask figma" src="https://img.shields.io/badge/Acessar%20Layout%20-Figma-%2304D361">
 </a>
 
+**[Acessar Site](https://letmeask-9f3fe.web.app/)** Para testar
+
 ### **Web**
 
 <p align="center">
@@ -101,14 +103,14 @@ Para iniciá-lo, siga os passos abaixo:
 $ yarn 
 
 # Execute a aplicação em modo de desenvolvimento
-$ yarn dev
+$ yarn start
 
 ## Passos com npm
 # Instale as dependências
 $ npm install
 
 # Execute a aplicação em modo de desenvolvimento
-$ npm run dev
+$ npm start
 
 # O servidor web inciará na porta:3000 - 
 # acesse http://localhost:3000 em seu navegador para ver a aplicação funcionando
@@ -136,6 +138,7 @@ Modifique o arquivo [.env.example](.env.example) trocando o nome para `.env.exam
 
 * [X] Migrar os estilos do Sass para o Styled-Components
 * [X] Dark Theme
+* [X] Layout Responsivo
 
 ---
 
