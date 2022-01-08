@@ -1,25 +1,31 @@
 import { useParams, useNavigate } from "react-router-dom";
 import { ref, remove, update } from "firebase/database";
 
-import { useRoom } from "../hooks/useRoom";
-import { database } from "../services/firebase";
+import { useRoom } from "../../hooks/useRoom";
+import { database } from "../../services/firebase";
 
-import logoImg from "../assets/images/logo.svg";
-import deleteImg from "../assets/images/delete.svg";
-import checkImg from "../assets/images/check.svg";
-import answerImg from "../assets/images/answer.svg";
+import { Content,  Header, HeaderContent, QuestionList, RoomTitle } from "./styles";
 
-import { Button } from "../components/Button";
-import { RoomCode } from "../components/RoomCode";
-import { Question } from "../components/Question";
+import logoImg from "../../assets/images/logo.svg";
+import deleteImg from "../../assets/images/delete.svg";
+import checkImg from "../../assets/images/check.svg";
+import answerImg from "../../assets/images/answer.svg";
+import whiteLogoImg from "../../assets/images/white-logo.svg";
 
-import "../styles/room.scss";
+
+import { Button } from "../../components/Button";
+import { RoomCode } from "../../components/RoomCode";
+import { Question } from "../../components/Question";
+import { useSwitchTheme } from "../../hooks/useSwitchTheme";
+import { SwitchTheme } from "../../components/SwitchTheme";
+
 
 
 export function AdminRoom() {
   const navigate = useNavigate();
   const { id } = useParams();
   const { questions, title } = useRoom(id);
+  const { theme } = useSwitchTheme();
 
   async function handleEndRoom() {
     update(ref(database, `rooms/${id}`), {
@@ -49,26 +55,27 @@ export function AdminRoom() {
 
 
   return (
-    <div id="page-room">
-      <header>
-        <div className="content">
-          <img src={logoImg} alt="Letmeask" />
+    <>
+      <Header>
+        <HeaderContent>
+          <img src={theme.title === "dark" ? whiteLogoImg : logoImg} alt="Letmeask" />
           <div>
+            <SwitchTheme />
             <RoomCode code={id || ""}/>
             <Button isOutlined onClick={handleEndRoom}>Encerrar sala</Button>
           </div>
-        </div>
-      </header>
+        </HeaderContent>
+      </Header>
 
-      <main>
-        <div className="room-title">
+      <Content>
+        <RoomTitle>
           <h1>{title}</h1>
           { questions.length > 0 &&
             <span>{questions.length} {questions.length === 1 ? 'pergunta': 'perguntas'}</span>
           }
-        </div>
+        </RoomTitle>
         
-        <div className="question-list">
+        <QuestionList>
           { questions.map(question => (
               <Question 
                 key={question.id}  
@@ -106,8 +113,8 @@ export function AdminRoom() {
               </Question>
             ))
           }
-        </div>
-      </main>
-    </div>
+        </QuestionList>
+      </Content>
+    </>
   );
 }

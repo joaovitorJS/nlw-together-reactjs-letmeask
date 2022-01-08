@@ -1,15 +1,17 @@
-.question {
-  background: #fefefe;
+import styled from "styled-components";
+
+export const QuestionContainer = styled.div`
+  background: ${props => props.theme.colors.backgroungForm};
   border-radius: 8px;
   box-shadow: 0 2px 12px rgba(0, 0, 0, 0.04);
   padding: 24px;
 
-  & + .question {
+  & + & {
     margin-top: 8px;
   }
 
   &.highlighted {
-    background: #f4f0ff;
+    background: ${props => props.theme.colors.highlighted};
     border: 1px solid #835afd;
 
     footer .user-info span {
@@ -18,7 +20,7 @@
   }
 
   &.answered {
-    background: #dbdcdd;
+    background: ${props => props.theme.colors.answered};
   }
 
   p {
@@ -30,23 +32,6 @@
     justify-content: space-between;
     align-items: center;
     margin-top: 24px;
-  
-    .user-info {
-      display: flex;
-      align-items: center;
-  
-      img {
-        width: 32px;
-        height: 32px;
-        border-radius: 50%;
-      }
-  
-      span {
-        margin-left: 8px;
-        color: #737380;
-        font-size: 14px;
-      }
-    }
 
     > div {
       display: flex;
@@ -80,4 +65,21 @@
       }
     }
   } 
-}
+`;
+
+export const UserInfo = styled.div`
+  display: flex;
+  align-items: center;
+
+  img {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+  }
+
+  span {
+    margin-left: 8px;
+    color: #737380;
+    font-size: 14px;
+  }
+`;
