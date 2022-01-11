@@ -1,5 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import { FormEvent, useState } from "react";
+import { ToastContainer, toast, ToastOptions } from "react-toastify";
 
 import { useAuth } from "../../hooks/useAuth";
 import { ref, get } from "firebase/database";
@@ -18,6 +19,15 @@ import { Aside } from "../../components/Aside";
 import { useSwitchTheme } from "../../hooks/useSwitchTheme";
 import useWindowDimensions from "../../hooks/useWindowDimensions";
 
+const toastyErrorStyle: ToastOptions = {
+  position: "top-right",
+  autoClose: 3000,
+  hideProgressBar: false,
+  closeOnClick: true,   
+  pauseOnHover: true,
+  draggable: true,
+  progress: undefined,
+}
 
 export function Home() {
   const navigate = useNavigate();
@@ -45,14 +55,14 @@ export function Home() {
     const room = await get(roomRef);
 
     if (!room.exists()) {
-      alert("Room does not exists.");
+      toast.error("Room does not exists.", toastyErrorStyle);
       setRoomCode("");
       return;
     }   
 
     
     if (room.val().endedAt) {
-      alert("Room already closed.");
+      toast.error("Room already closed.", toastyErrorStyle);
       return;
     }
 
@@ -97,6 +107,8 @@ export function Home() {
           </form>
         </MainContent>
       </Main>
+
+      <ToastContainer />
     </Container>
   );
 }

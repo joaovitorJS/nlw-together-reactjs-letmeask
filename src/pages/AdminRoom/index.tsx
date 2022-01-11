@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useParams, useNavigate, Link } from "react-router-dom";
 import { ref, remove, update } from "firebase/database";
 import { database } from "../../services/firebase";
+import { toast, ToastContainer } from "react-toastify";
 
 /*Hooks*/
 import { useRoom } from "../../hooks/useRoom";
@@ -26,10 +27,11 @@ import endRoom from "../../assets/images/end-room.svg";
 
 /*Styles*/
 import { Content,  Header, HeaderContent, NoQuestions, QuestionList, RoomTitle, ContentModal } from "./styles";
+import 'react-toastify/dist/ReactToastify.css';
 
 export function AdminRoom() {
   const navigate = useNavigate();
-  
+
   const { id } = useParams();
   const { questions, title } = useRoom(id);
   const { theme } = useSwitchTheme();
@@ -59,12 +61,16 @@ export function AdminRoom() {
   }
 
   async function handleEndRoom() {
-    update(ref(database, `rooms/${id}`), {
-      endedAt: new Date(),
-    });
-
-    navigate("/");
-    setIsOpenModalEndRoom(false);
+    try {
+      await update(ref(database, `rooms/${id}`), {
+        endedAt: new Date(),
+      });
+  
+      navigate("/");
+    } catch {
+      
+    }
+    
   }
 
   async function  hanldeCheckQuestionAsAnswered(questionId: string) {
@@ -81,12 +87,31 @@ export function AdminRoom() {
 
   async function  hanldeDeleteQuestion() {
     if (questionIdFromDelete !== null) {
-      await remove(ref(database, `rooms/${id}/questions/${questionIdFromDelete}`));
-      // add message confirmation
-
-      setIsOpenModalDeleteQuestion(false);
+      try {
+        await remove(ref(database, `rooms/${id}/questions/${questionIdFromDelete}`));
+        setIsOpenModalDeleteQuestion(false);
+        toast.success("Pergunta deletada!", {
+          position: "top-right",
+          autoClose: 3000,
+          hideProgressBar: false,
+          closeOnClick: true,       
+          pauseOnHover: false,
+          draggable: true,
+          progress: undefined,
+        });
+      } catch {
+        setIsOpenModalDeleteQuestion(false);
+        toast.error("Errro ao deletar pergunta!", {
+          position: "top-right",
+          autoClose: 3000,
+          hideProgressBar: false,
+          closeOnClick: true,   
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+        });
+      }
     }
-
   }
 
   return (
@@ -169,6 +194,8 @@ export function AdminRoom() {
             }
           </QuestionList>
         }
+
+        <ToastContainer />
       </Content>
 
       <Modal 
