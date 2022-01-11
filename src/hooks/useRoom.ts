@@ -40,7 +40,7 @@ export function useRoom(id: string = "") {
 
     const unsubscribe = onValue(roomRef, room => {
       const databaseRoom = room.val();
-      const firebaseQuestions: FirebaseQuestions = databaseRoom.questions ?? {};
+      const firebaseQuestions: FirebaseQuestions = databaseRoom?.questions ?? {};
 
       const parsedQuestions = Object.entries(firebaseQuestions).map(([key, value]) => {
         return {
@@ -54,7 +54,7 @@ export function useRoom(id: string = "") {
         }
       });
 
-      setTitle(databaseRoom.title);
+      setTitle(databaseRoom?.title);
       setQuestions(parsedQuestions);
 
       return () => {

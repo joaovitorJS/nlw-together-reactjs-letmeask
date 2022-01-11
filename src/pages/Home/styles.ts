@@ -39,6 +39,10 @@ export const MainContent = styled.div`
 
     button {
       margin-top: 16px;
+
+      display: flex;
+      align-items: center;
+      gap: 8px;
     }
 
     button, input {

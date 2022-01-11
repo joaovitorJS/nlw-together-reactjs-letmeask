@@ -11,6 +11,8 @@ import logoImg from "../../assets/images/logo.svg";
 import googleIconImg from "../../assets/images/google-icon.svg";
 import whiteLogoImg from "../../assets/images/white-logo.svg";
 
+import { FiLogIn } from "react-icons/fi";
+
 import { Button } from "../../components/Button";
 import { Aside } from "../../components/Aside";
 import { useSwitchTheme } from "../../hooks/useSwitchTheme";
@@ -46,7 +48,7 @@ export function Home() {
       alert("Room does not exists.");
       setRoomCode("");
       return;
-    }
+    }   
 
     
     if (room.val().endedAt) {
@@ -54,7 +56,13 @@ export function Home() {
       return;
     }
 
-    navigate(`/rooms/${roomCode}`);
+   
+    if (user?.id === room.val().authorId) {
+      navigate(`/admin/rooms/${roomCode}`);
+    } else {
+      navigate(`/rooms/${roomCode}`);
+    }
+
   }
 
   return (
@@ -83,6 +91,7 @@ export function Home() {
               onChange={event => setRoomCode(event.target.value)}
             />
             <Button type="submit">
+              <FiLogIn />
               Entrar na sala
             </Button>
           </form>

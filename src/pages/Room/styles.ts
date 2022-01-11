@@ -13,7 +13,7 @@ export const HeaderContent = styled.div`
   justify-content: space-between;
   align-items: center;
 
-  > img {
+  > a img {
     max-height: 45px;
   }
 

@@ -1,5 +1,5 @@
 import { FormEvent, useState } from "react";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { ref, push, remove } from "firebase/database";
 
 import { useRoom } from "../../hooks/useRoom";
@@ -68,7 +68,9 @@ export function Room() {
     <>
       <Header>
         <HeaderContent>
-          <img src={theme.title === "dark" ? whiteLogoImg : logoImg} alt="Letmeask" />
+          <Link to="/">
+            <img src={theme.title === "dark" ? whiteLogoImg : logoImg} alt="Letmeask" />
+          </Link>
           <div>
             {width > 768 &&
               <SwitchTheme />
