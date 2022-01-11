@@ -1,13 +1,5 @@
 import styled from "styled-components";
 
-interface Props {
-  numQuestions: number;
-}
-
-export const Container = styled.div<Props>`
-  height: ${props => props.numQuestions > 0 ? "auto" : "100vh"};
-  overflow-y: ${props => props.numQuestions > 0 ? "auto" : "hidden"};
-`;
 
 export const Header = styled.header`
   padding: 24px;
@@ -47,14 +39,12 @@ export const HeaderContent = styled.div`
   }
 `;
 
-export const Content = styled.main<Props>`
+export const Content = styled.main`
   max-width: 800px;
   margin: 0 auto;
   margin-bottom: 50px; 
   display: flex;
   flex-direction: column;
- 
-  height: ${props => props.numQuestions > 0 ? "auto" : "100vh"};
 
   @media screen and (max-width: 768px) {
     padding: 0 24px;
@@ -94,11 +84,11 @@ export const RoomTitle = styled.div`
 `;
 
 export const NoQuestions = styled.div`
-  flex: 1;
-
   display: flex;
   justify-content: center;
   align-items: center;
+
+  margin-top: 164px;
 
   @media screen and (max-width: 768px) {
     align-items: flex-start;

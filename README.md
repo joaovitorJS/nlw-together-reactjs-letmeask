@@ -128,6 +128,7 @@ Modifique o arquivo [.env.example](.env.example) trocando o nome para `.env.exam
 * **[Firebase](https://firebase.google.com/)**
 * **[Styled-Components](https://styled-components.com/)**
 * **[React Router](https://reactrouter.com/docs/en/v6/getting-started/overview)**
+* **[React Modal](https://github.com/reactjs/react-modal)**
 
 
 > Veja o arquivo  [package.json](https://github.com/joaovitorJS/nlw-05-podcastr/blob/master/package.json) para ver todas as dependências do projeto
@@ -139,6 +140,7 @@ Modifique o arquivo [.env.example](.env.example) trocando o nome para `.env.exam
 * [X] Migrar os estilos do Sass para o Styled-Components
 * [X] Dark Theme
 * [X] Layout Responsivo
+* [X] Modals de confirmação
 
 ---
 

@@ -1,11 +1,21 @@
-import { useParams, useNavigate } from "react-router-dom";
+import { useState } from "react";
+import { useParams, useNavigate, Link } from "react-router-dom";
 import { ref, remove, update } from "firebase/database";
-
-import { useRoom } from "../../hooks/useRoom";
 import { database } from "../../services/firebase";
 
-import { Content,  Header, HeaderContent, NoQuestions, QuestionList, RoomTitle, Container, ContentModal } from "./styles";
+/*Hooks*/
+import { useRoom } from "../../hooks/useRoom";
+import useWindowDimensions from "../../hooks/useWindowDimensions";
+import { useSwitchTheme } from "../../hooks/useSwitchTheme";
 
+/*Components*/
+import { Button } from "../../components/Button";
+import { RoomCode } from "../../components/RoomCode";
+import { Question } from "../../components/Question";
+import { SwitchTheme } from "../../components/SwitchTheme";
+import { Modal } from "../../components/Modal";
+
+/*Images*/
 import logoImg from "../../assets/images/logo.svg";
 import deleteImg from "../../assets/images/delete.svg";
 import checkImg from "../../assets/images/check.svg";
@@ -14,24 +24,17 @@ import whiteLogoImg from "../../assets/images/white-logo.svg";
 import emptyQuestions from "../../assets/images/empty-questions.svg";
 import endRoom from "../../assets/images/end-room.svg";
 
-
-import { Button } from "../../components/Button";
-import { RoomCode } from "../../components/RoomCode";
-import { Question } from "../../components/Question";
-import { useSwitchTheme } from "../../hooks/useSwitchTheme";
-import { SwitchTheme } from "../../components/SwitchTheme";
-import useWindowDimensions from "../../hooks/useWindowDimensions";
-import { Link } from "react-router-dom";
-import { Modal } from "../../components/Modal";
-import { useState } from "react";
-
+/*Styles*/
+import { Content,  Header, HeaderContent, NoQuestions, QuestionList, RoomTitle, ContentModal } from "./styles";
 
 export function AdminRoom() {
   const navigate = useNavigate();
+  
   const { id } = useParams();
   const { questions, title } = useRoom(id);
   const { theme } = useSwitchTheme();
   const { width } = useWindowDimensions();
+
   const [isOpenModalEndRoom, setIsOpenModalEndRoom] = useState(false);
   const [isOpenModalDeleteQuestion, setIsOpenModalDeleteQuestion] = useState(false);
   const [questionIdFromDelete, setQuestionIdFromDelete] = useState<string | null>(null)
@@ -61,6 +64,7 @@ export function AdminRoom() {
     });
 
     navigate("/");
+    setIsOpenModalEndRoom(false);
   }
 
   async function  hanldeCheckQuestionAsAnswered(questionId: string) {
@@ -79,12 +83,14 @@ export function AdminRoom() {
     if (questionIdFromDelete !== null) {
       await remove(ref(database, `rooms/${id}/questions/${questionIdFromDelete}`));
       // add message confirmation
+
+      setIsOpenModalDeleteQuestion(false);
     }
 
   }
 
   return (
-    <Container numQuestions={questions.length}>
+    <>
       <Header>
         <HeaderContent>
           <Link to="/">
@@ -100,7 +106,7 @@ export function AdminRoom() {
         </HeaderContent>
       </Header>
 
-      <Content numQuestions={questions.length}>
+      <Content>
         <RoomTitle>
           <div>
             <h1>{title}</h1>
@@ -202,6 +208,6 @@ export function AdminRoom() {
           </div>
         </ContentModal>
       </Modal>
-    </Container>
+    </>
   );
 } 

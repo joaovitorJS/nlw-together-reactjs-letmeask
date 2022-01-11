@@ -33,6 +33,9 @@ export const Content = styled.main`
   margin: 0 auto;
   margin-bottom: 50px; 
 
+  display: flex;
+  flex-direction: column;
+
   @media screen and (max-width: 768px) {
     padding: 0 24px;
   }
