@@ -33,7 +33,7 @@
 </p>
 
 <h2 align="center"> 
- <strong>Letmeask</strong> | Building 🚀 
+ <strong>Letmeask</strong> | Complete 🚀 
 </h2>
 
 <p align="center">
@@ -129,6 +129,7 @@ Modifique o arquivo [.env.example](.env.example) trocando o nome para `.env.exam
 * **[Styled-Components](https://styled-components.com/)**
 * **[React Router](https://reactrouter.com/docs/en/v6/getting-started/overview)**
 * **[React Modal](https://github.com/reactjs/react-modal)**
+* **[React-toastify](https://fkhadra.github.io/react-toastify/introduction)**
 
 
 > Veja o arquivo  [package.json](https://github.com/joaovitorJS/nlw-05-podcastr/blob/master/package.json) para ver todas as dependências do projeto
@@ -141,7 +142,7 @@ Modifique o arquivo [.env.example](.env.example) trocando o nome para `.env.exam
 * [X] Dark Theme
 * [X] Layout Responsivo
 * [X] Modals de confirmação
-
+* [X] Mensagens instantânea com React Toastify
 ---
 
 ## 🤔 Como contribuir para este projeto?
